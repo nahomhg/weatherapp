@@ -73,18 +73,15 @@ export default class Iphone extends Component {
             feelslikeF: current.feelslike_f,
             uv: current.UV,
             icon: current.icon,
+            postcode: current.display_location.zip,
           });
         }
         this.setState({ loaded: true });
       });
   }
 
-  switchSpeedUnit(){
-
-  }
-
-  switchTemptUnit(){
-
+  changeTemp(){
+      this.setState({unitC: !this.state.unitC});
   }
 
   renderError() {
@@ -140,7 +137,7 @@ export default class Iphone extends Component {
                                 </div>
             
                                 <div class={style_menu.locations}>    
-                                            <select class={style_menu.locationChoice} onchange="this.getWeather(value).bind(this)">
+                                            <select class={style_menu.locationChoice} value={this.state.value} onChange={event => this.getWeather(event.target.value)}>
                                                 <option value="e1 1es" >Current Location</option>
                                                 <option value="so14 3qn" >Southampton</option>
                                                 <option value="ex3 0hz" >Dover</option>
@@ -178,6 +175,7 @@ export default class Iphone extends Component {
                                 
 		);
 	}
+
         
   renderWeather() {
     return (
@@ -195,7 +193,7 @@ export default class Iphone extends Component {
           </div>
           <div class={style.second_container_currenttemp}>
             <div class={style.currentTemp}>
-              <h4> {this.state.tempc}&deg;C</h4>
+                <h4>{this.state.tempc} </h4>
             </div>
           </div>
           <div class={style.second_container_highlowtemp}>
@@ -298,7 +296,7 @@ export default class Iphone extends Component {
       
     } else {
       return (
-        <div className="center-block"><img src={require('../img/loading.gif')} alt="loading"/></div>
+        <div class={style.third_container_compass}><img src={require('../img/loading.gif')} alt="loading"/></div>
       )
     }
   }
