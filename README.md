@@ -1,2 +1,2 @@
 # weatherapp
-weather app
+weather app for sailors built using React
